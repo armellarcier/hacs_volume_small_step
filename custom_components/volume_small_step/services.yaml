@@ -1,0 +1,43 @@
+volume_up_small:
+  name: Volume Up (petit pas)
+  description: >
+    Augmente le volume d'un petit incrément (par défaut 0.02, soit 2 points).
+  target:
+    entity:
+      domain: media_player
+  fields:
+    step:
+      name: Pas
+      description: >
+        Valeur d'incrément du volume (entre 0.01 et 0.5). Défaut : 0.02.
+      required: false
+      default: 0.02
+      example: 0.02
+      selector:
+        number:
+          min: 0.01
+          max: 0.5
+          step: 0.01
+          mode: slider
+
+volume_down_small:
+  name: Volume Down (petit pas)
+  description: >
+    Diminue le volume d'un petit incrément (par défaut 0.02, soit 2 points).
+  target:
+    entity:
+      domain: media_player
+  fields:
+    step:
+      name: Pas
+      description: >
+        Valeur de décrement du volume (entre 0.01 et 0.5). Défaut : 0.02.
+      required: false
+      default: 0.02
+      example: 0.02
+      selector:
+        number:
+          min: 0.01
+          max: 0.5
+          step: 0.01
+          mode: slider
