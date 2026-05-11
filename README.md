@@ -29,6 +29,7 @@ The built-in `media_player.volume_up` / `volume_down` actions are hardcoded to *
 2. Add this repository URL and select category **Integration**
 3. Click **Download**
 4. Restart Home Assistant
+5. Go to **Settings → Devices & Services → Add integration**, search for **Volume Small Step** and click it — done.
 
 ### Manual
 
@@ -38,22 +39,13 @@ The built-in `media_player.volume_up` / `volume_down` actions are hardcoded to *
    └── custom_components/
        └── volume_small_step/
            ├── __init__.py
+           ├── config_flow.py
            ├── manifest.json
-           └── services.yaml
+           ├── services.yaml
+           └── strings.json
    ```
 2. Restart Home Assistant
-
----
-
-## Configuration
-
-Add the following to your `configuration.yaml`:
-
-```yaml
-volume_small_step:
-```
-
-No further configuration is required. Restart Home Assistant after adding this line.
+3. Go to **Settings → Devices & Services → Add integration**, search for **Volume Small Step** and click it.
 
 ---
 
