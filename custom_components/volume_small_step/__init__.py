@@ -140,14 +140,28 @@ def _register_services(hass: HomeAssistant) -> None:
 
 
 async def async_setup(hass: HomeAssistant, config: dict) -> bool:
-    """Register services at HA startup — no configuration.yaml entry needed."""
-    _register_services(hass)
+    """Auto-create the config entry on first install so no manual UI step is needed."""
+
+    async def _async_create_entry_if_missing(_event=None) -> None:
+        if not hass.config_entries.async_entries(DOMAIN):
+            hass.async_create_task(
+                hass.config_entries.flow.async_init(
+                    DOMAIN, context={"source": "import"}
+                )
+            )
+
+    # HA may not be fully started yet when this runs; wait for it
+    if hass.is_running:
+        await _async_create_entry_if_missing()
+    else:
+        hass.bus.async_listen_once("homeassistant_started", _async_create_entry_if_missing)
+
     return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Called when the user adds the integration via the UI (no-op, services already up)."""
-    _register_services(hass)  # idempotent, safe to call again
+    """Set up services from the config entry."""
+    _register_services(hass)
     return True
 
 

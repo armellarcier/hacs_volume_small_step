@@ -22,3 +22,9 @@ class VolumeSmallStepConfigFlow(ConfigFlow, domain=DOMAIN):
 
         # No form needed — create the entry immediately
         return self.async_create_entry(title="Volume Small Step", data={})
+
+    async def async_step_import(
+        self, user_input: dict | None = None
+    ) -> ConfigFlowResult:
+        """Handle auto-creation from async_setup (first install)."""
+        return await self.async_step_user(user_input)
